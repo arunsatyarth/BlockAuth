@@ -1,22 +1,16 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.24;
 
 contract Registration {
-    address public owner;
-
     struct UserDetails {
         string username;
         string name;
         string profilepicture;
     }
-    mapping(address=> UserDetails) public users;
+    mapping(address => UserDetails) public users;
     
-    constructor() public {
-        owner = msg.sender;
+
+    function add_data(string _username,string _name,string _profilepicture ) public {
+        users[msg.sender] = UserDetails(_username,_name,_profilepicture);
+
     }
-
-    modifier restricted() {
-        if (msg.sender == owner) _;
-    }
-
-
 }
