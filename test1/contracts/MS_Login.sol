@@ -20,8 +20,8 @@ contract MS_Login {
     //At client we  will store the uuid to address map in the contract
     //Authentication wil only be possible if the uuid pointed address is the same one which made the change in  login_details_rev
 
-    mapping(address=> string)  public login_details;//filled by server
-    mapping(string=> address)   login_details_rev;//filled by client
+    mapping(address=> string) public login_details;//filled by server
+    mapping(string=> address) public login_details_rev;//filled by client
     
     constructor() public {
         owner = msg.sender;
@@ -40,11 +40,6 @@ contract MS_Login {
         login_details_rev[_uuid] = msg.sender;
 
     }
-
-    function address_from_uuid(string _uuid) public returns (address) {
-        return login_details_rev[_uuid];
-    }
-
 
     //tells if a uuid has got a successful login. if yes read the coresponding address from login_details_rev
     function is_login(string _uuid) public returns (bool) {
