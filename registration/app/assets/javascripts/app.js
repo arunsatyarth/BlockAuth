@@ -29,19 +29,20 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON("Election.json", function(election) {
+    $.getJSON("Registration.json", function(reg) {
       // Instantiate a new truffle contract from the artifact
-      App.contracts.Election = TruffleContract(election);
+      App.contracts.Registration = TruffleContract(reg);
       // Connect provider to interact with contract
-      App.contracts.Election.setProvider(App.web3Provider);
+      App.contracts.Registration.setProvider(App.web3Provider);
 
-      App.listenForEvents();
+      //App.listenForEvents();
 
       return App.render();
     });
   },
 
   // Listen for events emitted from the contract
+  /*
   listenForEvents: function() {
     App.contracts.Election.deployed().then(function(instance) {
       // Restart Chrome if you are unable to receive this event
@@ -57,66 +58,55 @@ App = {
       });
     });
   },
+  */
 
   render: function() {
-    var electionInstance;
+    var regInstance;
     var loader = $("#loader");
     var content = $("#content");
+    var create_account_div = $("#create_account_div");
+    var account_details_div = $("#account_details_div");
 
     loader.show();
     content.hide();
 
-    // Load account data
-    web3.eth.getCoinbase(function(err, account) {
-      if (err === null) {
-        App.account = account;
-        $("#accountAddress").html("Your Account: " + account);
-      }
-    });
 
     // Load contract data
-    App.contracts.Election.deployed().then(function(instance) {
-      electionInstance = instance;
-      return electionInstance.candidatesCount();
-    }).then(function(candidatesCount) {
-      var candidatesResults = $("#candidatesResults");
-      candidatesResults.empty();
+    App.contracts.Registration.deployed().then(function(instance) {
+      regInstance = instance;
+      let data=regInstance.users(App.account);
+      return data;
+    }).then(function(data) {
+        loader.hide();
+        content.show();
+        if(data[0]=="")
+        {
+            create_account_div.show();
+            account_details_div.hide();
+            
+        }
+        else
+        {//account is already created
+            create_account_div.hide();
+            account_details_div.show();
+            $("#username").html(data[0]);
+            $("#Name").html(data[1]);
+            $("#picture").html(data[2]);
 
-      var candidatesSelect = $('#candidatesSelect');
-      candidatesSelect.empty();
-
-      for (var i = 1; i <= candidatesCount; i++) {
-        electionInstance.candidates(i).then(function(candidate) {
-          var id = candidate[0];
-          var name = candidate[1];
-          var voteCount = candidate[2];
-
-          // Render candidate Result
-          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</td></tr>"
-          candidatesResults.append(candidateTemplate);
-
-          // Render candidate ballot option
-          var candidateOption = "<option value='" + id + "' >" + name + "</ option>"
-          candidatesSelect.append(candidateOption);
-        });
-      }
-      return electionInstance.voters(App.account);
-    }).then(function(hasVoted) {
-      // Do not allow a user to vote
-      if(hasVoted) {
-        $('form').hide();
-      }
-      loader.hide();
-      content.show();
+        }
     }).catch(function(error) {
       console.warn(error);
     });
   },
 
-  castVote: function() {
-    var candidateId = $('#candidatesSelect').val();
-    App.contracts.Election.deployed().then(function(instance) {
-      return instance.vote(candidateId, { from: App.account });
+  createAccount: function() {
+    var username = $('#form_username').val();
+    var name = $('#form_name').val();
+    var picture = $('#form_picture').val();
+    if( username=="" || name=="" )
+      return false;
+    App.contracts.Registration.deployed().then(function(instance) {
+      return instance.add_data(username,name,picture, { from: App.account });
     }).then(function(result) {
       // Wait for votes to update
       $("#content").hide();
