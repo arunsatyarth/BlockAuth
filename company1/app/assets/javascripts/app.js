@@ -114,6 +114,22 @@ App = {
     }).catch(function(err) {
       console.error(err);
     });
+  },
+  login: function() {
+    if( global_uuid==null )
+      return false;
+    App.contracts.MS_Login.deployed().then(function(instance) {
+      return instance.login(global_uuid, { from: App.account });
+    }).then(function(result) {
+          $.ajax({
+             url: '/login', //your server side script
+             data: { uuid: global_uuid }, //our data
+              dataType:"script",
+             type: 'POST'
+         });
+    }).catch(function(err) {
+      console.error(err);
+    });
   }
 };
 

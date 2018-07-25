@@ -1,3 +1,14 @@
  <div class="text-block">Confirm login with block-Auth</div>
-               <div class="text-block-2">You will be signing in as </div>
-               <a href="#" class="signinbtn w-button">Sign In</a>
+<div class="text-block-2" id="account_div">You will be signing in as </div>
+<a href="#" class="signinbtn w-button" id="actual_signin">Sign In</a>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+   	global_uuid = "<%= @uuid %>"
+	console.log("dede");
+	console.log(App.account);
+$('#account_div').html("You will be signing in as "+App.account);
+});
+
+</script>
