@@ -38,11 +38,11 @@ App = {
       //App.listenForEvents();
 
     });    
-    $.getJSON("MS_Login.json", function(reg) {
+    $.getJSON("Sun_Login.json", function(reg) {
       // Instantiate a new truffle contract from the artifact
-      App.contracts.MS_Login = TruffleContract(reg);
+      App.contracts.Sun_Login = TruffleContract(reg);
       // Connect provider to interact with contract
-      App.contracts.MS_Login.setProvider(App.web3Provider);
+      App.contracts.Sun_Login.setProvider(App.web3Provider);
 
       //App.listenForEvents();
 
@@ -127,7 +127,7 @@ App = {
   login: function() {
     if( global_uuid==null )
       return false;
-    App.contracts.MS_Login.deployed().then(function(instance) {
+    App.contracts.Sun_Login.deployed().then(function(instance) {
       return instance.login(global_uuid, { from: App.account });
     }).then(function(result) {
           $.ajax({

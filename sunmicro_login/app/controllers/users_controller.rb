@@ -35,7 +35,7 @@ PAGINATION_PERPAGE=10
          		
 			end
 		else
-				contract=get_mslogin_contract
+				contract=get_sunlogin_contract
 
 			@access=contract.call.access_rights(current_user.address)
 
@@ -48,14 +48,12 @@ PAGINATION_PERPAGE=10
 	    #end
 	  end
 
-	  def buy
-	  end
 
 	def signinform
 		#write into bchain
 		#binding.pry
 		@uuid=SecureRandom.uuid
-		contract=get_mslogin_contract
+		contract=get_sunlogin_contract
 
 		contract.transact_and_wait.login_promise(@uuid.to_s)
         respond_to do |format|
@@ -66,7 +64,7 @@ PAGINATION_PERPAGE=10
 
     def login
 		uuid=params[:uuid]
-		contract=get_mslogin_contract
+		contract=get_sunlogin_contract
 		islogedin=contract.call.is_login(uuid)
 #binding.pry
 		if islogedin
@@ -100,7 +98,7 @@ PAGINATION_PERPAGE=10
     def buy
     	id=params[:id].to_i
     	if id==0 or id==1
-			contract=get_mslogin_contract
+			contract=get_sunlogin_contract
 
 			contract.transact_and_wait.grant_access(current_user.address, id)
 			@d=34;
@@ -126,13 +124,13 @@ PAGINATION_PERPAGE=10
   	def get_reg_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash_reg = JSON.parse(File.read('public/Registration.json'))
-		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0x4633119d0f85e6a708cea244e5fd6bd2886a6bfd", abi: data_hash_reg["abi"])
+		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0x83ba997c0f084af8967e3908a988140649685fe0", abi: data_hash_reg["abi"])
   		return contract_reg
   	end
-  	def get_mslogin_contract
+  	def get_sunlogin_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
-		data_hash = JSON.parse(File.read('public/MS_Login.json'))
-		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0x5956d5f17668b23be6616bef6e3f3f43b62308de", abi: data_hash["abi"])
+		data_hash = JSON.parse(File.read('public/Sun_Login.json'))
+		contract = Ethereum::Contract.create(client: client,name: "Sun_Login", address: "0x6fc6814d261873d26f845686b47ad438c0fbb0cf", abi: data_hash["abi"])
   		return contract
   	end
 end

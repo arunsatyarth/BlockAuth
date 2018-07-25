@@ -3,7 +3,10 @@
 
 <div data-collapse="small" data-animation="default" data-duration="400" class="navbar w-nav">
    <div class="nav_container w-container">
-      <a href="#" class="nav_brand w-nav-brand"><img src="https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo.jpg" srcset="https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo-p-800.jpeg 800w, https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo-p-1080.jpeg 1080w, https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo.jpg 1200w" sizes="90px" class="image"/></a>
+      <a href="#" class="nav_brand w-nav-brand">
+               <img src="assets/sun.png" sizes="90px" class="image"/>
+        
+      </a>
       <nav role="navigation" class="nav_menu w-nav-menu">
         <%= link_to "Log out", "/user_logout", method: "delete",class:"nav_link active w-nav-link" %>
 
@@ -34,7 +37,7 @@
                           <div>
                            <div class="w-container">
                               <div>
-                                 <h4 class="heading-2">Visual studio Licence</h4>
+                                 <h4 class="heading-2">Mysql Licence</h4>
                                  <%if @access && @access[0]==true%>
                                     <b>---Bought</b>
                                 <%else%>
@@ -44,7 +47,7 @@
 
                               </div>
                               <div>
-                                 <h4 class="heading-2">Office 365 Licence     </h4>
+                                 <h4 class="heading-2">Solaris Licence     </h4>
                                  <%if @access && @access[1]==true%>
                                     <b>---Bought</b>
                                 <%else%>

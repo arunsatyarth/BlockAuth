@@ -48,8 +48,7 @@ PAGINATION_PERPAGE=10
 	    #end
 	  end
 
-	  def buy
-	  end
+
 
 	def signinform
 		#write into bchain
@@ -126,13 +125,13 @@ PAGINATION_PERPAGE=10
   	def get_reg_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash_reg = JSON.parse(File.read('public/Registration.json'))
-		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0x4633119d0f85e6a708cea244e5fd6bd2886a6bfd", abi: data_hash_reg["abi"])
+		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0x83ba997c0f084af8967e3908a988140649685fe0", abi: data_hash_reg["abi"])
   		return contract_reg
   	end
   	def get_mslogin_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash = JSON.parse(File.read('public/MS_Login.json'))
-		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0x5956d5f17668b23be6616bef6e3f3f43b62308de", abi: data_hash["abi"])
+		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0x6febd1603829d71df436557d7224b340f82af12f", abi: data_hash["abi"])
   		return contract
   	end
 end
