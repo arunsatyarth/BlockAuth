@@ -18,7 +18,6 @@ PAGINATION_PERPAGE=10
 
 
 	  def show
-		#binding.pry
 
 	  	#if a request comes in to show a users profile page it comes here. From the id get the user
 	  	@user=User.find_by(id: params[:id])
@@ -28,6 +27,10 @@ PAGINATION_PERPAGE=10
 	  		#redirect_to home_path
 	        #@user=User.new
 	        if current_user
+				contract=get_mslogin_contract
+				@access=contract.call.access_rights(current_user.address)
+				#binding.pry
+
 				redirect_to current_user  
 	        else
          		render "users/new"
@@ -41,6 +44,9 @@ PAGINATION_PERPAGE=10
 	            #render "users/show"
 	        #end
 	    #end
+	  end
+
+	  def buy
 	  end
 
 	def signinform
@@ -86,6 +92,15 @@ PAGINATION_PERPAGE=10
 		  	end
 
 		end
+
+    end
+
+    def buy
+    	id=params[:id].to_i
+    	if id==1 or id==2
+			@access=contract.transact_and_wait.access_rights(id)
+		end
+  		redirect_to @user
 
     end
 

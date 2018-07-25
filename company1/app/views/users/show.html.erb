@@ -40,11 +40,24 @@
                            <div class="w-container">
                               <div>
                                  <h4 class="heading-2">Visual studio Licence</h4>
+                                 <%if @access && @access[0]==true%>
+                                    <b>Bought</b>
+                                <%else%>
                                  <a href="#" class="link-2 w-button">Buy</a>
+                                 <%= link_to "Buy" , "/buy/1" , method:  :get ,
+                                  class:"link-2 w-button"%>
+                                <%end%>
+
                               </div>
                               <div>
                                  <h4 class="heading-2">Office 365 Licence     </h4>
-                                 <a href="#" class="link-2 w-button">Buy</a>
+                                 <%if @access && @access[1]==true%>
+                                    <b>Bought</b>
+                                <%else%>
+                                 <%= link_to "Buy" , "/buy/2" , method:  :get ,
+
+                                <%end%>
+
                               </div>
                            </div>
                         </div>

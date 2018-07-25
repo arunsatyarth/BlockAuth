@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'user_signup'    => 'users#new'
   
   post 'user_login'    => 'users#login'
+  post 'buy/:id'    => 'users#buy'
 
   delete 'user_logout' => 'users#destroy'
 
