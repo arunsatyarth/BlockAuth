@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
 				user.password=address
 				user.name=data[1]
-				user.profilepic = data[0]
+				user.profilepic = data[2]
 				user.save!
 				return user
 
