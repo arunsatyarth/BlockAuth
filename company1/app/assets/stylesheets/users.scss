@@ -1,4 +1,4 @@
-/* Generated on: Wed Jul 25 2018 04:35:26 GMT+0000 (UTC) */
+/* Generated on: Wed Jul 25 2018 11:27:40 GMT+0000 (UTC) */
 /* ==========================================================================
    normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css 
    ========================================================================== */
@@ -129,4 +129,14 @@
   background-image: -webkit-linear-gradient(270deg, #44496e, #44496e);
   background-image: linear-gradient(180deg, #44496e, #44496e);
   text-align: center;
+}
+
+.heading-2 {
+  display: inline-block;
+}
+
+.link-2 {
+  margin-left: 44px;
+  background-image: -webkit-linear-gradient(270deg, rgba(35, 219, 146, .5), rgba(35, 219, 146, .5));
+  background-image: linear-gradient(180deg, rgba(35, 219, 146, .5), rgba(35, 219, 146, .5));
 }

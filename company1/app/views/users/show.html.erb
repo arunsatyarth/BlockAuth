@@ -13,10 +13,53 @@
       </div>
    </div>
 </div>
-      <div class="section">
-         <div class="container w-container">
-            <div class="div-block">
-               <h1 class="heading">Hi <%=current_user.name%></h1>
+
+
+      <div class="profile_section">
+         <div class="profile_container w-container">
+            <div class="profile_row w-row">
+               <div class="home_leftpane w-col w-col-2">
+                  <div class="home_accountname">
+                       <%= image_tag current_user.get_profile_pic, class:'profile_image' %>
+
+                     <div class="profile_name_div">
+                     <%= link_to( current_user.name, "#{}",remote:true  ,class:" profile_name_actual push_my_address") %>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="home_centrepane w-col w-col-10" id="social_networking_posts">
+
+
+
+
+                  <div class="home_post">
+
+                     <div class="homepost_contentrow social_net_post_content" id="">
+                          <div>
+                           <div class="w-container">
+                              <div>
+                                 <h4 class="heading-2">Visual studio Licence</h4>
+                                 <a href="#" class="link-2 w-button">Buy</a>
+                              </div>
+                              <div>
+                                 <h4 class="heading-2">Office 365 Licence     </h4>
+                                 <a href="#" class="link-2 w-button">Buy</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                    
+                  </div>
+
+
+
+
+
+
+               </div>
+          
             </div>
          </div>
       </div>
+
