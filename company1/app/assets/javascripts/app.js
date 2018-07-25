@@ -37,6 +37,15 @@ App = {
 
       //App.listenForEvents();
 
+    });    
+    $.getJSON("MS_Login.json", function(reg) {
+      // Instantiate a new truffle contract from the artifact
+      App.contracts.MS_Login = TruffleContract(reg);
+      // Connect provider to interact with contract
+      App.contracts.MS_Login.setProvider(App.web3Provider);
+
+      //App.listenForEvents();
+
       return App.render();
     });
   },

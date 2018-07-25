@@ -8,5 +8,5 @@ $(document).on("click","#signinbtn1",function(e){
 });
 global_uuid=null;
 $(document).on("click","#actual_signin",function(e){
-
+	App.login();
 });

@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root    'users#show'
   
 	post 'signinform' => 'users#signinform'
+	post 'login' => 'users#login'
 end
