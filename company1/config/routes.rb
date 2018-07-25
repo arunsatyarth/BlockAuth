@@ -5,4 +5,20 @@ Rails.application.routes.draw do
   
 	post 'signinform' => 'users#signinform'
 	post 'login' => 'users#login'
+
+
+
+
+
+  get 'user_signup'    => 'users#new'
+  
+  post 'user_login'    => 'users#login'
+
+  delete 'user_logout' => 'users#destroy'
+
+  get 'user_logout' => 'users#destroy'
+
+      resources :users  
+
+
 end

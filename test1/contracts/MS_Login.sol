@@ -26,9 +26,15 @@ contract MS_Login {
     function grant_access()public restricted{
 
     }
+    function login_promise(string _uuid) public restricted{
+        login_details[msg.sender] = _uuid;
+    }
+    //put a safety net here. he sud only be able to edit the uuid where his address is written. otherwise he might arbitaryly edit somebody elses uuid
     function login(string _uuid) public {
-        login_details_rev[_uuid] = msg.sender;
-
+        string _uuid2=login_details[msg.sender];
+        if(keccak256(_uuid) == keccak256(_uuid2)){
+            login_details_rev[_uuid] = msg.sender;
+        }
     }
     function get_address(string _uuid) public returns (address) {
         return login_details_rev[_uuid];
