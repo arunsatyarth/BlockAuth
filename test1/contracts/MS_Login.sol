@@ -23,8 +23,13 @@ contract MS_Login {
         if (msg.sender == owner) _;
     }
 
-    function grant_access()public restricted{
-
+    function grant_access(address addr,uint index)public restricted{
+        License lic=access_rights[addr];
+        if(index==0)
+            lic.visual_studio=true;
+        else if (index==1)
+            lic.office365=true;
+        access_rights[addr]=lic;
     }
     function login_promise(string _uuid) public restricted{
         login_details[msg.sender] = _uuid;
