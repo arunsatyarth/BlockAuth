@@ -27,8 +27,6 @@ PAGINATION_PERPAGE=10
 	  		#redirect_to home_path
 	        #@user=User.new
 	        if current_user
-				contract=get_mslogin_contract
-				@access=contract.call.access_rights(current_user.address)
 				#binding.pry
 
 				redirect_to current_user  
@@ -37,7 +35,11 @@ PAGINATION_PERPAGE=10
          		
 			end
 		else
-         		render "users/show"
+				contract=get_mslogin_contract
+
+			@access=contract.call.access_rights(current_user.address)
+
+     		render "users/show"
 	  	end
 	    #respond_to do |format|
 	        #format.html do 
@@ -97,10 +99,14 @@ PAGINATION_PERPAGE=10
 
     def buy
     	id=params[:id].to_i
-    	if id==1 or id==2
-			@access=contract.transact_and_wait.access_rights(id)
+    	if id==0 or id==1
+			contract=get_mslogin_contract
+
+			contract.transact_and_wait.grant_access(current_user.address, id)
+			@d=34;
+
 		end
-  		redirect_to @user
+  		redirect_to current_user
 
     end
 
@@ -120,13 +126,13 @@ PAGINATION_PERPAGE=10
   	def get_reg_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash_reg = JSON.parse(File.read('public/Registration.json'))
-		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0xc55a692f86ed392203bbd49ae4a67bd5d16d6828", abi: data_hash_reg["abi"])
+		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0x4633119d0f85e6a708cea244e5fd6bd2886a6bfd", abi: data_hash_reg["abi"])
   		return contract_reg
   	end
   	def get_mslogin_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash = JSON.parse(File.read('public/MS_Login.json'))
-		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0xf3d03f4ab37189247cb4c7a8185609f9112a8806", abi: data_hash["abi"])
+		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0x5956d5f17668b23be6616bef6e3f3f43b62308de", abi: data_hash["abi"])
   		return contract
   	end
 end

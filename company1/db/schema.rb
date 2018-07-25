@@ -13,17 +13,14 @@
 ActiveRecord::Schema.define(version: 20180725085413) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "address",                         null: false
-    t.string   "username",                        null: false
+    t.string   "address",         null: false
+    t.string   "username",        null: false
     t.string   "name"
     t.string   "profilepic"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "visual_studio",   default: false
-    t.boolean  "office365",       default: false
-    t.integer  "ring",            default: 0
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

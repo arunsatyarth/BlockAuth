@@ -10,12 +10,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
         t.string 'password_digest'
         t.string 'remember_digest'#this is to maintain login session through reboots
         
-        
-        
-        t.boolean :visual_studio,default:false
-        t.boolean :office365,default:false
-        t.integer :ring,default:0
-        
 
       t.timestamps
     end
