@@ -1,0 +1,76 @@
+
+
+
+<div data-collapse="small" data-animation="default" data-duration="400" class="navbar w-nav">
+   <div class="nav_container w-container">
+      <a href="#" class="nav_brand w-nav-brand">
+           <img src="assets/ms2.jpg" sizes="90px" class="image"/>
+
+      </a>
+      <nav role="navigation" class="nav_menu w-nav-menu">
+        <%= link_to "Log out", "/user_logout", method: "delete",class:"nav_link active w-nav-link" %>
+
+      </nav>
+      <div class="nav_menu_button w-nav-button">
+         <div class="nav_menu_btn_icon w-icon-nav-menu"></div>
+      </div>
+   </div>
+</div>
+
+
+      <div class="profile_section">
+         <div class="profile_container w-container">
+            <div class="profile_row w-row">
+               <div class="home_leftpane w-col w-col-2">
+                  <div class="home_accountname">
+                       <%= image_tag current_user.get_profile_pic, class:'profile_image' %>
+
+                     <div class="profile_name_div">
+                     <%= link_to( current_user.name, "#{}",remote:true  ,class:" profile_name_actual push_my_address") %>
+                     </div>
+                  </div>
+
+               </div>
+               <div class="home_centrepane w-col w-col-10" id="social_networking_posts">
+                  <div class="home_post">
+                     <div class="homepost_contentrow social_net_post_content" id="">
+                          <div>
+                           <div class="w-container">
+                              <div>
+                                 <h4 class="heading-2">Visual studio Licence</h4>
+                                 <%if @access && @access[0]==true%>
+                                    <b>---Bought</b>
+                                <%else%>
+                                 <%= link_to "Buy" , "/buy/0" , method:  :post ,
+                                  class:"link-2 w-button"%>
+                                <%end%>
+
+                              </div>
+                              <div>
+                                 <h4 class="heading-2">Office 365 Licence     </h4>
+                                 <%if @access && @access[1]==true%>
+                                    <b>---Bought</b>
+                                <%else%>
+                                 <%= link_to "Buy" , "/buy/1" , method:  :post ,
+                                  class:"link-2 w-button"%>
+
+                                <%end%>
+
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                    
+                  </div>
+
+
+
+
+
+
+               </div>
+          
+            </div>
+         </div>
+      </div>
+
