@@ -45,12 +45,10 @@ PAGINATION_PERPAGE=10
 
 	def signinform
 		#write into bchain
-		client = Ethereum::HttpClient.new('http://localhost:7545')
-		data_hash = JSON.parse(File.read('public/MS_Login.json'))
 		#binding.pry
 		@uuid=SecureRandom.uuid
+		contract=get_mslogin_contract
 
-		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0xf3d03f4ab37189247cb4c7a8185609f9112a8806", abi: data_hash["abi"])
 		contract.transact_and_wait.login_promise(@uuid.to_s)
         respond_to do |format|
             format.js {render :file => "users/show_signinform.js.erb" }
@@ -60,17 +58,13 @@ PAGINATION_PERPAGE=10
 
     def login
 		uuid=params[:uuid]
-		client = Ethereum::HttpClient.new('http://localhost:7545')
-		data_hash = JSON.parse(File.read('public/MS_Login.json'))
-
-		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0xf3d03f4ab37189247cb4c7a8185609f9112a8806", abi: data_hash["abi"])
+		contract=get_mslogin_contract
 		islogedin=contract.call.is_login(uuid)
 #binding.pry
 		if islogedin
 			address=contract.call.get_address(uuid)
 			address="0x"+address
-			data_hash_reg = JSON.parse(File.read('public/Registration.json'))
-			contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0xc55a692f86ed392203bbd49ae4a67bd5d16d6828", abi: data_hash_reg["abi"])
+			contract_reg = get_reg_contract
 			user_data=contract_reg.call.users(address)
 		    begin
   				@user=User.create_from_block_auth(address,user_data)
@@ -108,8 +102,16 @@ PAGINATION_PERPAGE=10
 
 
   private 	
-  		#This function simply guves a secure way to access params
-  		def user_params#called as strong parameters
-            params.require(:user).permit(:username,:email,:password,:password_confirmation)
-  		end
+  	def get_reg_contract
+		client = Ethereum::HttpClient.new('http://localhost:7545')
+		data_hash_reg = JSON.parse(File.read('public/Registration.json'))
+		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0xc55a692f86ed392203bbd49ae4a67bd5d16d6828", abi: data_hash_reg["abi"])
+  		return contract_reg
+  	end
+  	def get_mslogin_contract
+		client = Ethereum::HttpClient.new('http://localhost:7545')
+		data_hash = JSON.parse(File.read('public/MS_Login.json'))
+		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0xf3d03f4ab37189247cb4c7a8185609f9112a8806", abi: data_hash["abi"])
+  		return contract
+  	end
 end
