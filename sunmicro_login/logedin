@@ -1,0 +1,26 @@
+
+[1mFrom:[0m D:/Apps/dapps/hackathon/company1/app/controllers/users_controller.rb @ line 31 UsersController#login:
+
+    [1;34m22[0m:     [32mdef[0m [1;34mlogin[0m
+    [1;34m23[0m: 		uuid=params[[33m:uuid[0m]
+    [1;34m24[0m: 		client = [1;34;4mEthereum[0m::[1;34;4mHttpClient[0m.new([31m[1;31m'[0m[31mhttp://localhost:7545[1;31m'[0m[31m[0m)
+    [1;34m25[0m: 		data_hash = [1;34;4mJSON[0m.parse([1;34;4mFile[0m.read([31m[1;31m'[0m[31mpublic/MS_Login.json[1;31m'[0m[31m[0m))
+    [1;34m26[0m: 
+    [1;34m27[0m: 		contract = [1;34;4mEthereum[0m::[1;34;4mContract[0m.create([35mclient[0m: client,[35mname[0m: [31m[1;31m"[0m[31mMS_Login[1;31m"[0m[31m[0m, [35maddress[0m: [31m[1;31m"[0m[31m0xa41097a3753fa541b973b3f5a1204fbc20d7f11f[1;31m"[0m[31m[0m, [35mabi[0m: data_hash[[31m[1;31m"[0m[31mabi[1;31m"[0m[31m[0m])
+    [1;34m28[0m: 		islogedin=contract.call.is_login(uuid)
+    [1;34m29[0m: 		binding.pry
+    [1;34m30[0m: 
+ => [1;34m31[0m: 		[32mif[0m islogedin
+    [1;34m32[0m: 			address=contract.call.get_address(uuid)
+    [1;34m33[0m: 
+    [1;34m34[0m: 			data_hash_reg = [1;34;4mJSON[0m.parse([1;34;4mFile[0m.read([31m[1;31m'[0m[31mpublic/Registration.json[1;31m'[0m[31m[0m))
+    [1;34m35[0m: 			contract_reg = [1;34;4mEthereum[0m::[1;34;4mContract[0m.create([35mclient[0m: client,[35mname[0m: [31m[1;31m"[0m[31mRegistration[1;31m"[0m[31m[0m, [35maddress[0m: [31m[1;31m"[0m[31m0x91fad34ec4077bccb612eb354e3275e9f2468348[1;31m"[0m[31m[0m, [35mabi[0m: data_hash[[31m[1;31m"[0m[31mabi[1;31m"[0m[31m[0m])
+    [1;34m36[0m: 			user_data=contract.transact_and_wait.users(address)
+    [1;34m37[0m: 
+    [1;34m38[0m: 		[32mend[0m
+    [1;34m39[0m: 
+    [1;34m40[0m:        	respond_to [32mdo[0m |format|
+    [1;34m41[0m:             format.js {render [33m:file[0m => [31m[1;31m"[0m[31musers/show_signinform.js.erb[1;31m"[0m[31m[0m }
+    [1;34m42[0m:         [32mend[0m
+    [1;34m43[0m:     [32mend[0m
+
