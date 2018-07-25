@@ -4,6 +4,18 @@ class UsersController < ApplicationController
 
 PAGINATION_PERPAGE=10
   skip_before_filter :verify_authenticity_token, only: :create
+		def new
+		    	#binding.pry
+
+			if current_user
+				redirect_to current_user  
+			else
+         		render "users/new"
+			end
+
+		end
+
+
 
 	  def show
 		#binding.pry
@@ -14,20 +26,21 @@ PAGINATION_PERPAGE=10
 	  	if @user.nil? || @user!=current_user then
 	  		#if the user dosent exist or if he is not currently logged in we redirect him  to homepage
 	  		#redirect_to home_path
-	        @user=User.new
-
+	        #@user=User.new
+	        if current_user
+				redirect_to current_user  
+	        else
+         		render "users/new"
+         		
+			end
+		else
+         		render "users/show"
 	  	end
-	    @level_1_tab="profile_tab"    
-
-	    
-
-
-	            
-	    respond_to do |format|
-	        format.html do 
-	            render "users/show"
-	        end
-	    end
+	    #respond_to do |format|
+	        #format.html do 
+	            #render "users/show"
+	        #end
+	    #end
 	  end
 
 	def signinform
@@ -52,7 +65,7 @@ PAGINATION_PERPAGE=10
 
 		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0xf3d03f4ab37189247cb4c7a8185609f9112a8806", abi: data_hash["abi"])
 		islogedin=contract.call.is_login(uuid)
-binding.pry
+#binding.pry
 		if islogedin
 			address=contract.call.get_address(uuid)
 			address="0x"+address
@@ -67,7 +80,6 @@ binding.pry
 		    else
 		  		#if the signup is succeeded then we redirect him to homepage
 		  		#Commenting below login code becoz we dont want to login user just after signup. We will send a mail and user will have to activate his acciunt
-		    	binding.pry
 		  		
 		  		log_in @user
 		      	remember @user 

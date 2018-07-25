@@ -26,7 +26,7 @@ module UsersHelper
 	end
 
 	#gets the currently logged in user
-    def get_current_user
+    def current_user
 		#if there is a session object, use it. otherwise look at the cookie
 		if (user_name = session[:user_name])#This is not comparing with user_name. it is assigning to it
 			#if currentuser has someone it returns him. if it is the first call it will be empty in which case
@@ -51,9 +51,6 @@ module UsersHelper
 		end
 	end
     
-    def current_user
-        return @current_user
-    end
 	
 	#calls the current_user method and tells if anyone is logged in at all
 	def logged_in?

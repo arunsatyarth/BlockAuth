@@ -1,21 +1,22 @@
 
-      <div data-collapse="small" data-animation="default" data-duration="400" class="navbar w-nav">
-         <div class="nav_container w-container">
-            <a href="#" class="nav_brand w-nav-brand"><img src="https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo.jpg" srcset="https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo-p-800.jpeg 800w, https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo-p-1080.jpeg 1080w, https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo.jpg 1200w" sizes="90px" class="image"/></a>
-            <nav role="navigation" class="nav_menu w-nav-menu"><a href="https://www.google.com/" class="nav_link active w-nav-link">Home</a></nav>
-            <div class="nav_menu_button w-nav-button">
-               <div class="nav_menu_btn_icon w-icon-nav-menu"></div>
-            </div>
-         </div>
+
+
+<div data-collapse="small" data-animation="default" data-duration="400" class="navbar w-nav">
+   <div class="nav_container w-container">
+      <a href="#" class="nav_brand w-nav-brand"><img src="https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo.jpg" srcset="https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo-p-800.jpeg 800w, https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo-p-1080.jpeg 1080w, https://uploads-ssl.webflow.com/5b573595f1ae931815a9ddaf/5b573675dbd9dd5f541c0498_mslogo.jpg 1200w" sizes="90px" class="image"/></a>
+      <nav role="navigation" class="nav_menu w-nav-menu">
+        <%= link_to "Log out", "/user_logout", method: "delete",class:"nav_link active w-nav-link" %>
+
+      </nav>
+      <div class="nav_menu_button w-nav-button">
+         <div class="nav_menu_btn_icon w-icon-nav-menu"></div>
       </div>
+   </div>
+</div>
       <div class="section">
          <div class="container w-container">
             <div class="div-block">
-               <h1 class="heading">Microsoft now supports universal signin with Block-Auth</h1>
-               <a href="#" class="link w-button" id="signinbtn1">Sign-In with block-auth</a>
-            </div>
-            <div class="div-block-2" id="signinarea">
-              
+               <h1 class="heading">Hi <%=current_user.name%></h1>
             </div>
          </div>
       </div>
