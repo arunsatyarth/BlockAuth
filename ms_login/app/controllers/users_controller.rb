@@ -125,13 +125,13 @@ PAGINATION_PERPAGE=10
   	def get_reg_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash_reg = JSON.parse(File.read('public/Registration.json'))
-		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0x83ba997c0f084af8967e3908a988140649685fe0", abi: data_hash_reg["abi"])
+		contract_reg = Ethereum::Contract.create(client: client,name: "Registration", address: "0xc7c5dc467a8fdcd8b99fce640ec3ecbdd9e81bec", abi: data_hash_reg["abi"])
   		return contract_reg
   	end
   	def get_mslogin_contract
 		client = Ethereum::HttpClient.new('http://localhost:7545')
 		data_hash = JSON.parse(File.read('public/MS_Login.json'))
-		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0x6febd1603829d71df436557d7224b340f82af12f", abi: data_hash["abi"])
+		contract = Ethereum::Contract.create(client: client,name: "MS_Login", address: "0x871438a4babce16a635496948eca9f3ca7958b20", abi: data_hash["abi"])
   		return contract
   	end
 end
