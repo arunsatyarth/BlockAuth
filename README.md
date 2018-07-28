@@ -8,5 +8,6 @@ Blockauth has a few smart contracts using which you permanently put your user de
 
 # if you find the peoject useful, consider a donation
 Ethereum
+
 0x033ff6918d434cef3887d8e529c14d1bcb91ca8b
 
