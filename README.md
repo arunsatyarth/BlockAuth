@@ -6,3 +6,7 @@
 # What BlockAuth does
 Blockauth has a few smart contracts using which you permanently put your user details in the blockchain instead of a 3rd party app like facebook. You can then visit any website which supports BlockAuth login and sign in using your data in the blockchain.
 
+# if you find the peoject useful, consider a donation
+Ethereum
+0x033ff6918d434cef3887d8e529c14d1bcb91ca8b
+
